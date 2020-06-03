@@ -52,8 +52,17 @@ bin/scrd: src/scrd/scrd.o src/common/hid_LINUX.o
 bin/scwr: src/scwr/scwr.o src/common/hid_LINUX.o
 	${CC} -o $@ ${LDFLAGS} $^
 
+install: $(BIN)
+
+install:
+	mkdir -p $(DESTDIR)$(PREFIX)/bin
+	cp -f $(BIN) $(DESTDIR)$(PREFIX)/bin
+
+uninstall:
+	rm -f $(BIN)
+
 clean:
 	rm -f $(OBJ) $(BIN)
 
-.PHONY: all clean
+.PHONY: all clean install uninstall
 
